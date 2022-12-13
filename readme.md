@@ -69,3 +69,7 @@ Enter new receipts into your google sheet with respect to products SKU
 Data about products and orders with these SKU's will be automatically pulled from Shopify
 
 CSV files according to Als-Swiss requirements will be created automatically and uploaded via SFTP to als-swiss servers
+
+## Code usage
+
+Code is published for educational purposes only. Commercial use requires additional author's permission
