@@ -3,6 +3,7 @@ require_once __DIR__ . '/dotenv.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/db_mysql.php';
+require_once __DIR__ . '/shemas.php';
 
 use Shopify\Clients\Rest;
 use Shopify\Context;
@@ -96,6 +97,9 @@ class shopify_reader{
 		$db->query("SELECT 1 FROM products WHERE item_sku='".$p['item_sku']."'");
 		if($db->num_rows() == 0){
 
+			$shema_product = shema_product();
+			$p = shema_apply_filter($p, $shema_product);
+
 			$db->insert_row('products', $p);
 		}
 	}
@@ -165,6 +169,9 @@ class shopify_reader{
 
 		$db->query("SELECT 1 FROM orders WHERE order_number='".$ord['order_number']."' AND item_sku='".$ord['item_sku']."'");
 		if($db->num_rows() == 0){
+
+			$shema_order = shema_order();
+			$ord = shema_apply_filter($ord, $shema_order);
 
 			$db->insert_row('orders', $ord);
 		}

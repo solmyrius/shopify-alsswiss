@@ -3,6 +3,7 @@ require_once __DIR__ . '/dotenv.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/db_mysql.php';
+require_once __DIR__ . '/shemas.php';
 require_once __DIR__ . '/sheetreader.php';
 require_once __DIR__ . '/shopifyreader.php';
 require_once __DIR__ . '/fileworker.php';
@@ -57,6 +58,9 @@ class alsswiss{
 	function receipt_add($receipt){
 
 		global $db;
+
+		$shema_receipt = shema_receipt();
+		$receipt = shema_apply_filter($receipt, $shema_receipt);
 
 		$db->insert_row('receipts', $receipt);
 	}
